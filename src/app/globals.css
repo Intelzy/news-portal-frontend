@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  /* This sets the default text color to a dark gray for readability */
+  color: rgb(var(--foreground-rgb));
+  
+  /* This sets the default background to a clean white */
+  background: rgb(var(--background-end-rgb));
+}
