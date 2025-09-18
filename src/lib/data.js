@@ -17,7 +17,7 @@ const articles = [
     category: "World News",
     image: "/images/typhoon-yagi.jpg",
     author: "Reuters",
-    publishedDate: "2025-09-14",
+    publishedDate: "2025-09-17",
     summary: "Nations across the globe are pledging support and sending aid as the scale of devastation from Super Typhoon Yagi becomes clear, with hundreds of casualties reported across Southeast Asia.",
     content: "Typhoon Yagi, one of the most powerful storms to hit the region in years, caused catastrophic flooding and landslides in northern Vietnam and the Philippines earlier this month. The United Nations has launched an emergency appeal to address the urgent need for food, clean water, and shelter for millions of displaced people.",
   },
