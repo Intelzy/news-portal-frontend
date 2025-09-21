@@ -1,72 +1,44 @@
-// src/app/layout.jsx
-
+import { Inter } from 'next/font/google'; // Import the font
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 import './globals.css';
 import Script from 'next/script';
 
-// --- UPDATED METADATA ---
+// Configure the font
+const inter = Inter({ subsets: ['latin'] });
+
 export const metadata = {
-  // --- Title for browser tabs and search results ---
   title: {
-    default: "Online Kanda | Your Trusted News Source from Nepal",
-    template: "%s | Online Kanda", // %s will be replaced by the page's specific title
+    default: "Online Kanda | Your Trusted News Source",
+    template: "%s | Online Kanda",
   },
-  // --- Description for search engine results ---
-  description: "Your trusted source for timely and accurate news coverage, with a special focus on Nepal, Bharatpur, and relevant global affairs.",
-  keywords: ["Nepal News", "Online Kanda", "Bharatpur", "Chitwan", "Nepali Politics", "Sports", "Economy"],
-  
-  // --- Open Graph (for Facebook, LinkedIn, etc.) ---
-  openGraph: {
-    title: "Online Kanda | Your Trusted News Source",
-    description: "Breaking news, in-depth analysis, and stories from Nepal and around the world.",
-    url: "https://yourwebsite.com", // TODO: Replace with your actual domain
-    siteName: "Online Kanda",
-    images: [
-      {
-        url: "/images/og-image.png", // Recommended: 1200x630px
-        width: 1200,
-        height: 630,
-        alt: "Online Kanda Logo",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-
-  // --- Twitter Card ---
-  twitter: {
-    card: "summary_large_image",
-    title: "Online Kanda | Your Trusted News Source",
-    description: "Breaking news, in-depth analysis, and stories from Nepal and around the world.",
-    // TODO: Add your Twitter handle if you have one
-    // creator: "@yourtwitterhandle", 
-    images: ["/images/og-image.png"], // Must be an absolute URL in production
-  },
-
-  // --- Favicon and App Icons ---
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
+  description: "Your trusted source for timely and accurate news coverage from Nepal and around the world.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    // Add the font variable to the <html> tag
+    <html lang="en" className={inter.className}>
       <head>
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1874560417184600"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
       </head>
-      <body className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
+      {/* Changed background to white for a cleaner look */}
+      <body className="bg-white text-gray-800">
         <Navbar />
-        <main className="container mx-auto p-4 md:p-6 flex-grow">
-          {children}
-        </main>
+        <div className="container mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <main className="lg:col-span-2">
+            {children}
+          </main>
+          <aside className="lg:col-span-1 hidden lg:block">
+            <Sidebar />
+          </aside>
+        </div>
         <Footer />
       </body>
     </html>

@@ -1,5 +1,3 @@
-// src/app/team/page.jsx
-
 import Image from 'next/image';
 
 export const metadata = {
@@ -12,7 +10,7 @@ const teamMembers = [
     name: "Rajiv Dhungana",
     role: "Editor-in-Chief",
     imageUrl: "/images/Rajiv.jpg",
-    bio: "Rajiv leads our editorial team with over 15 years of experience in journalism, ensuring every story meets our standard of integrity."
+    bio: "Rajiv leads our editorial vision with over 15 years of experience in journalism, ensuring every story meets our standard of integrity."
   },
   {
     name: "Sulav Subedi",
@@ -37,19 +35,14 @@ export default function TeamPage() {
           Behind every headline is a team of passionate individuals committed to bringing you accurate, timely, and impactful news.
         </p>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 justify-items-center">
         {teamMembers.map((member) => (
-          // MODIFIED: Added bg-blue-50 to the card for better blending with white-background images
-          <div key={member.name} className="text-center max-w-sm p-6 bg-blue-50 rounded-lg shadow-sm"> 
-            <div className="relative h-60 w-60 mx-auto rounded-full overflow-hidden shadow-lg mb-6 ">
+          <div key={member.name} className="text-center max-w-sm p-6 bg-gray-50 rounded-lg shadow-sm"> 
+            <div className="relative h-60 w-60 mx-auto rounded-full overflow-hidden shadow-lg mb-6 border-4 border-blue-600">
               <Image 
                 src={member.imageUrl} 
                 alt={`Photo of ${member.name}`}
                 fill
-                // objectFit: 'cover' is already good for filling the circle
-                // If images have transparent backgrounds, they will float nicely.
-                // If they have white backgrounds, this bg-blue-50 will help blend.
                 style={{ objectFit: 'cover' }} 
                 className="transition-transform duration-300 hover:scale-105" 
               />
