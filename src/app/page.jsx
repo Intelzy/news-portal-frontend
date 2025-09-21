@@ -1,9 +1,7 @@
-// src/app/page.jsx
-
-import { getAllArticles } from "@/lib/data";
-import ArticleGrid from "@/components/ArticleGrid";
-import Link from "next/link";
-import Image from "next/image";
+import { getAllArticles, getArticlesByCategory } from "@/lib/data";
+import HeroSection from "@/components/HeroSection";
+import CategorySection from "@/components/CategorySection";
+import AdBanner from "@/components/AdBanner";
 
 export default function HomePage() {
   const allArticles = getAllArticles();
@@ -12,62 +10,37 @@ export default function HomePage() {
     return <p className="text-center text-lg">No articles available.</p>;
   }
 
-  // 1. Split your articles into three distinct sections
-  const topStory = allArticles[0];           // The very first article
-  const latestNews = allArticles.slice(1, 5);  // The next 4 articles
-  const moreNews = allArticles.slice(5);       // All the rest
+  // Data for the Hero Section
+  const heroArticle = allArticles[0];
+  const sideHeadlines = allArticles.slice(1, 4); // Get 3 headlines for the right side
+  
+  // Data for Category Sections
+  const worldNewsArticles = getArticlesByCategory('World News');
+  const economyArticles = getArticlesByCategory('Economy');
+  const techArticles = getArticlesByCategory('Technology');
+  const sportsArticles = getArticlesByCategory('Sports');
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-8">
+      {/* The new hero section */}
+      <HeroSection mainArticle={heroArticle} sideArticles={sideHeadlines} />
       
-      {/* --- TOP STORY SECTION --- */}
-      {topStory && (
-        <section>
-          <h2 className="text-3xl font-extrabold text-gray-800 inline-block border-b-4 border-blue-600 pb-2 mb-6">
-            Top Story
-          </h2>
-          <Link href={`/news/${topStory.slug}`} className="block group">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-              <div className="relative w-full h-80 rounded-lg overflow-hidden">
-                <Image 
-                  src={topStory.image} 
-                  alt={topStory.title} 
-                  fill 
-                  style={{ objectFit: 'cover' }} 
-                  priority 
-                  className="group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div>
-                <h3 className="text-3xl lg:text-4xl font-extrabold my-3 leading-tight group-hover:text-blue-700 transition-colors">{topStory.title}</h3>
-                <p className="text-gray-600 text-lg mb-4">{topStory.summary}</p>
-                <span className="text-blue-600 font-bold text-lg group-hover:underline">Read Full Story &rarr;</span>
-              </div>
-            </div>
-          </Link>
-        </section>
-      )}
+      {/* A large ad banner */}
+      <section className="text-center">
+        <div className="bg-gray-200 w-full min-h-[90px] flex items-center justify-center rounded-lg">
+           <AdBanner 
+              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+              data-ad-slot="YOUR_HOMEPAGE_LEADERBOARD_ID"
+            />
+            <span className="text-gray-500 text-sm">Advertisement (728x90)</span>
+        </div>
+      </section>
 
-      {/* --- LATEST NEWS SECTION --- */}
-      {latestNews.length > 0 && (
-        <section>
-          <h2 className="text-3xl font-extrabold text-gray-800 inline-block border-b-4 border-red-600 pb-2 mb-6">
-            Latest News
-          </h2>
-          <ArticleGrid articles={latestNews} />
-        </section>
-      )}
-
-      {/* --- MORE NEWS SECTION --- */}
-      {moreNews.length > 0 && (
-        <section>
-          <h2 className="text-3xl font-extrabold text-gray-800 inline-block border-b-4 border-gray-400 pb-2 mb-6">
-            More News
-          </h2>
-          <ArticleGrid articles={moreNews} />
-        </section>
-      )}
-
+      {/* The new category sections */}
+      <CategorySection title="World News" articles={worldNewsArticles} categorySlug="world-news" accentColor="border-gray-500" />
+      <CategorySection title="Economy" articles={economyArticles} categorySlug="economy" accentColor="border-blue-600" />
+      <CategorySection title="Technology" articles={techArticles} categorySlug="technology" accentColor="border-purple-600" />
+      <CategorySection title="Sports" articles={sportsArticles} categorySlug="sports" accentColor="border-green-600" />
     </div>
   );
 }
