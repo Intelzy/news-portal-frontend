@@ -4,7 +4,7 @@ import { metadata as siteMetadata } from '../layout';
 
 export const metadata = {
   title: 'About Us',
-  description: `Learn more about ${siteMetadata.title.default}, our mission, our story, and our commitment to delivering factual news.`,
+  description: `Learn more about, our mission, our story, and our commitment to delivering factual news.`,
 };
 
 export default function AboutPage() {
