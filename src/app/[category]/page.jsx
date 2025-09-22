@@ -2,7 +2,7 @@ import { getArticlesByCategory, getCategories } from "@/lib/data";
 import ArticleGrid from "@/components/ArticleGrid";
 import { notFound } from 'next/navigation';
 
-// Fix: Create URL-friendly slugs for categories
+// This function is correct as is.
 export function generateStaticParams() {
   const categories = getCategories();
   return categories.map((category) => ({
@@ -10,6 +10,7 @@ export function generateStaticParams() {
   }));
 }
 
+// This function is also correct as is.
 export async function generateMetadata({ params }) {
   const categorySlug = params.category;
   const categories = getCategories();
@@ -23,11 +24,12 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function CategoryPage({ params }) {
+// --- THIS IS THE FIX ---
+// The page component for a dynamic route should be an async function.
+export default async function CategoryPage({ params }) {
   const categorySlug = params.category;
   const categories = getCategories();
   
-  // Fix: Convert the slug from the URL back to the original category name to find articles
   const originalCategory = categories.find(c => c.toLowerCase().replace(/ /g, '-') === categorySlug);
 
   if (!originalCategory) {
